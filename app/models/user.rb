@@ -7,12 +7,9 @@ class User < ApplicationRecord
   attr_accessor :password
   has_many :questions
 
-  validates :email, :username, presence: true
-  validates :email, :username, uniqueness: true
-  validates :password, presence: true, on: :create
-  validates_confirmation_of :password
-  validates :email, format: /\A[\w\-.]+@[\w\-]+\.[\w\-.]+\z/, length: { maximum: 255 }
-  validates :username, format: /\A[\w]+\z/, length: { maximum: 40 }
+  validates :password, confirmation: true, presence: true, on: :create
+  validates :email, presence: true, uniqueness: true, format: /\A[\w\-.]+@[\w\-]+\.[\w\-.]+\z/, length: { maximum: 255 }
+  validates :username, presence: true, uniqueness: true, format: /\A[\w]+\z/, length: { maximum: 40 }
 
   before_validation :username_downcase
   before_save :encrypt_password
@@ -33,7 +30,6 @@ class User < ApplicationRecord
         )
       )
     return user if user.password_hash == hashed_password
-
     nil
   end
 
@@ -52,5 +48,4 @@ class User < ApplicationRecord
   def self.hash_to_string(password_hash)
     password_hash.unpack('H*')[0]
   end
-
 end
