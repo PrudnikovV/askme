@@ -15,7 +15,7 @@ class User < ApplicationRecord
   validates :username, format: /\A[\w]+\z/, length: { maximum: 40 }
 
   before_validation :username_downcase
-  before_save :encrypt_password, :username_downcase
+  before_save :encrypt_password
 
   def username_downcase
     unless username.nil?
