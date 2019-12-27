@@ -1,3 +1,10 @@
-<p>
-  <%= @hello %>
-</p>
+<h1><%= @user.name %></h1>
+
+<div>
+  <%= image_tag user_avatar(@user), alt: "[фото]" %>
+</div>
+
+<h2>@<%= @user.username %></h2>
+
+<a href="#" class="button button-green">Задать вопрос</a>
+

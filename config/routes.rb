@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
-  get 'show' => 'users#show'
+  root to: 'users#index'
+
+  resources :users
+  resources :questions
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
