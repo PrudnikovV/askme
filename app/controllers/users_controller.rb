@@ -32,5 +32,17 @@ class UsersController < ApplicationController
       )
     ]
     @new_question = Question.new
+    @count_questions = "Всего задано #{@questions.count} #{inclination(@questions.count,'вопрос','вопроса','вопросов')}"
+  end
+
+  def inclination(quantity, word, word2, word3)
+    quantity = quantity % 100
+    rest = quantity % 10
+      if rest == 0 || rest >= 5 || (10..20).include?(quantity)
+        return word3
+      elsif rest >= 2
+        return word2
+      end
+    return word
   end
 end
