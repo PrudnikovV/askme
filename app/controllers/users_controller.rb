@@ -39,10 +39,12 @@ class UsersController < ApplicationController
   def show
     @questions = @user.questions.order(created_at: :desc)
     @new_question = @user.questions.build
-    @count_questions = "Всего задано #{@questions.count} #{inclination(@questions.count,'вопрос','вопроса','вопросов')}"
+    @questions_count = @questions.count
+    @answers_count = @questions.where.not(answer: nil).count
+    @unanswered_count = @questions_count - @answers_count
   end
 
-  def inclination(quantity, word, word2, word3)
+  def self.inclination(quantity, word, word2, word3)
     quantity = quantity % 100
     rest = quantity % 10
       if rest == 0 || rest >= 5 || (10..20).include?(quantity)
