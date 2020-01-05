@@ -50,6 +50,11 @@
       <div class="form-action buffer-top">
         <%= f.submit 'Сохранить', class: 'button button-dark button-small' %>
       </div>
+
+      <div class="form-action buffer-top">
+        <%= link_to 'Удалить профиль', destroy_user_path,
+          class: 'button button-light button-small' %>
+      </div>
     <% end %>
   </div>
 </div>

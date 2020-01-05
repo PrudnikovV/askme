@@ -4,7 +4,7 @@ class User < ApplicationRecord
   ITERATIONS = 20_000
   DIGEST = OpenSSL::Digest::SHA256.new
   attr_accessor :password
-  has_many :questions
+  has_many :questions, dependent: :destroy
 
   validates :password, confirmation: true, presence: true, on: :create
   validates :email, presence: true, uniqueness: true, format: /\A[\w\-.]+@[\w\-]+\.[\w\-.]+\z/, length: { maximum: 255 }

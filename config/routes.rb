@@ -6,7 +6,9 @@ Rails.application.routes.draw do
   get 'log_out' => 'sessions#destroy'
   get 'log_in' => 'sessions#new'
 
-  resources :users, except: [:destroy]
+  get 'destroy_user' => 'users#destroy'
+
+  resources :users
   resources :sessions, only: [:new, :create, :destroy]
   resources :questions, except: [:show, :new, :index]
 end
