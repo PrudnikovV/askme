@@ -20,6 +20,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       redirect_to root_url, notice: 'Пользователь успешно зарегистрирован!'
+      session[:user_id] = @user.id
     else
       render 'new'
     end
@@ -42,17 +43,6 @@ class UsersController < ApplicationController
     @questions_count = @questions.count
     @answers_count = @questions.where.not(answer: nil).count
     @unanswered_count = @questions_count - @answers_count
-  end
-
-  def self.inclination(quantity, word, word2, word3)
-    quantity = quantity % 100
-    rest = quantity % 10
-      if rest == 0 || rest >= 5 || (10..20).include?(quantity)
-        return word3
-      elsif rest >= 2
-        return word2
-      end
-    return word
   end
 
   private
