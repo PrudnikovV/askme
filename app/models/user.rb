@@ -9,6 +9,7 @@ class User < ApplicationRecord
   validates :password, confirmation: true, presence: true, on: :create
   validates :email, presence: true, uniqueness: true, format: /\A[\w\-.]+@[\w\-]+\.[\w\-.]+\z/, length: { maximum: 255 }
   validates :username, presence: true, uniqueness: true, format: /\A[\w]+\z/, length: { maximum: 40 }
+  validates :background_color, format: /\A#(?:\h{3}){1,2}\z/
 
   before_validation :username_downcase
   before_save :encrypt_password
