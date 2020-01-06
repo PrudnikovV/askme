@@ -30,11 +30,11 @@
     </div>
     <div class="column-1-3">
       <h1 class="title-small"><%= @answers_count %></h1>
-      <p>ответов</p>
+      <p><%=inclination(@questions_count, 'ответ', 'ответа', 'ответов') %></p>
     </div>
     <div class="column-1-3">
       <h1 class="title-small"><%= @unanswered_count %></h1>
-      <p>безответных</p>
+      <p><%=inclination(@questions_count, 'безответный', 'безответа', 'безответных') %></p>
     </div>
   </div>
 </div>
