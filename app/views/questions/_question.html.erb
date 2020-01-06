@@ -16,6 +16,9 @@
     <div class="question-date">
       <%= l(question.created_at, format: :short) %>
     </div>
+    <div class="question-author">
+      <%= link_to User.find(question.author_id).name, user_path(User.find(question.author_id)) if question.author_id %>
+    </div>
   </div>
 
   <%# Если адресат вопроса — текущий пользователь, он может редактировать вопрос %>

@@ -1,5 +1,5 @@
 <% questions ||= nil %>
-<% action_icon = question.answer.blank ? 'reply' : 'pencil' %>
+<% action_icon = question.answer ? 'reply' : 'pencil' %>
 
 <div class="question">
   <div class="question-content">
@@ -16,11 +16,14 @@
     <div class="question-date">
       <%= l(question.created_at, format: :short) %>
     </div>
+    <div class="question-author">
+      <%= link_to User.find(question.author_id).name, user_path(User.find(question.author_id)) if question.author_id %>
+    </div>
   </div>
 
   <% if question.user == current_user %>
     <div class="question-actions">
-      <%= link_to fa_icon(edit_icon), edit_question_path(question) %>
+      <%= link_to fa_icon(action_icon), edit_question_path(question) %>
       <%= link_to fa_icon('trash-o'), question_path(question),
                   method: :delete, data: {confirm: 'Точно удалить вопрос?'} %>
     </div>
