@@ -23,7 +23,7 @@ class User < ApplicationRecord
 
   def default_background_color
     if background_color.nil?
-      background_color = DEFAULT_BACKGROUND_COLOR
+      self.background_color = DEFAULT_BACKGROUND_COLOR
     end
   end
 
