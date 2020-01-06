@@ -1,6 +1,7 @@
 require 'openssl'
 
 class User < ApplicationRecord
+  DEFAULT_BACKGROUND_COLOR = "#000000"
   ITERATIONS = 20_000
   DIGEST = OpenSSL::Digest::SHA256.new
   attr_accessor :password
@@ -11,12 +12,18 @@ class User < ApplicationRecord
   validates :username, presence: true, uniqueness: true, format: /\A[\w]+\z/, length: { maximum: 40 }
   validates :background_color, format: /\A#(?:\h{3}){1,2}\z/
 
-  before_validation :username_downcase
+  before_validation :username_downcase, :default_background_color
   before_save :encrypt_password
 
   def username_downcase
     unless username.nil?
       username.downcase!
+    end
+  end
+
+  def default_background_color
+    if background_color.nil?
+      background_color = DEFAULT_BACKGROUND_COLOR
     end
   end
 
