@@ -32,7 +32,6 @@ def destroy
   redirect_to user_path(user), notice: 'Вопрос удален :('
 end
 
-
   private
     def set_question
       @question = Question.find(params[:id])
