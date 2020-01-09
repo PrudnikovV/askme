@@ -46,7 +46,6 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user.questions.delete_autor_id(session[:user_id])
     User.destroy(session[:user_id])
     session[:user_id] = nil
     redirect_to root_url, notice: 'Вы успешно удалили аккаунт!'
