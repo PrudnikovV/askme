@@ -2,7 +2,7 @@
   <div class="question-content">
     <%# Текст вопроса %>
     <div class="question-text text-lead">
-      <%= question.text %>
+      <%= question.text_show %>
     </div>
 
     <%# Текст ответа, если он есть %>
@@ -18,6 +18,11 @@
     </div>
     <div class="question-author">
       <%= link_to User.find(question.author_id).name, user_path(User.find(question.author_id)) if User.find_by(id: question.author_id) %>
+    </div>
+    <div class="question-tags">
+      <% question.tags.each do |tag| %>
+      <%= link_to tag.name, tag_path(tag) %>
+      <% end %>
     </div>
   </div>
 

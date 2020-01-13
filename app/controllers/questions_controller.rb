@@ -11,26 +11,30 @@ class QuestionsController < ApplicationController
   def create
   @question = Question.new(question_params)
   @question.author_id = session[:user_id]
-  if @question.save
-    redirect_to user_path(@question.user), notice: 'Вопрос задан'
-  else
-    render :edit
+    if @question.save
+      redirect_to user_path(@question.user), notice: 'Вопрос задан'
+    else
+      render :edit
+    end
   end
-end
 
-def update
-  if @question.update(question_params)
-    redirect_to user_path(@question.user), notice: 'Вопрос сохранен'
-  else
-    render :edit
+  def update
+    if @question.update(question_params)
+      redirect_to user_path(@question.user), notice: 'Вопрос сохранен'
+    else
+      render :edit
+    end
   end
-end
 
-def destroy
-  user = @question.user
-  @question.destroy
-  redirect_to user_path(user), notice: 'Вопрос удален :('
-end
+  def destroy
+    user = @question.user
+    @question.destroy
+    redirect_to user_path(user), notice: 'Вопрос удален :('
+  end
+
+  def text_view
+    @question.text.delete("#")
+  end
 
   private
     def set_question

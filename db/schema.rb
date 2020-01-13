@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_05_134457) do
+ActiveRecord::Schema.define(version: 2020_01_13_093502) do
+
+  create_table "question_tags", force: :cascade do |t|
+    t.integer "tag_id", null: false
+    t.integer "question_id", null: false
+    t.index ["question_id"], name: "index_question_tags_on_question_id"
+    t.index ["tag_id"], name: "index_question_tags_on_tag_id"
+  end
 
   create_table "questions", force: :cascade do |t|
     t.string "text"
@@ -20,6 +27,12 @@ ActiveRecord::Schema.define(version: 2020_01_05_134457) do
     t.integer "user_id"
     t.integer "author_id"
     t.index ["user_id"], name: "index_questions_on_user_id"
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -35,5 +48,7 @@ ActiveRecord::Schema.define(version: 2020_01_05_134457) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
+  add_foreign_key "question_tags", "questions"
+  add_foreign_key "question_tags", "tags"
   add_foreign_key "questions", "users"
 end

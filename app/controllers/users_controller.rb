@@ -8,6 +8,7 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
+    @tags = Tag.all
   end
 
   def new
