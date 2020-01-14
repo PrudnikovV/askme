@@ -8,7 +8,7 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
-    @tags = Tag.all
+    @tags = Tag.all.order('name')
   end
 
   def new

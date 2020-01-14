@@ -32,10 +32,6 @@ class QuestionsController < ApplicationController
     redirect_to user_path(user), notice: 'Вопрос удален :('
   end
 
-  def text_view
-    @question.text.delete("#")
-  end
-
   private
     def set_question
       @question = Question.find(params[:id])
