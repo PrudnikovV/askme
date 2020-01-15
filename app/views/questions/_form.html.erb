@@ -1,31 +1,33 @@
-<% questions ||= nil %>
-<% action_icon = question.answer ? 'reply' : 'pencil' %>
-
-<div class="question">
-  <div class="question-content">
-    <div class="question-text text-lead">
-      <%= question.text %>
-    </div>
-
-    <% if question.answer.present? %>
-      <div class="question-answer text-lead">
-        <%= question.answer %>
+<div class="form">
+  <%= form_for(@question) do |f| %>
+    <% if @question.errors.any? %>
+      <div class="form-errors">
+        <ul>
+          <% @question.errors.full_messages.each do |message| %>
+            <li class="form-error-message"><%= message %></li>
+          <% end %>
+        </ul>
       </div>
     <% end %>
 
-    <div class="question-date">
-      <%= l(question.created_at, format: :short) %>
-    </div>
-    <div class="question-author">
-      <%= link_to User.find(question.author_id).name, user_path(User.find(question.author_id)) if question.author_id %>
-    </div>
-  </div>
+    <%= f.hidden_field :user_id %>
 
-  <% if question.user == current_user %>
-    <div class="question-actions">
-      <%= link_to fa_icon(action_icon), edit_question_path(question) %>
-      <%= link_to fa_icon('trash-o'), question_path(question),
-                  method: :delete, data: {confirm: 'Точно удалить вопрос?'} %>
+    <div class="form-field">
+      <%= f.label :text, 'Вопрос', class: 'form-label' %>
+      <%= f.text_area :text, class: 'form-textarea' %>
+    </div>
+
+    <% if current_user.present? && current_user == @question.user %>
+      <div class="form-field">
+        <%= f.label :answer, 'Ответ', class: 'form-label' %>
+        <%= f.text_area :answer, class: 'form-textarea' %>
+      </div>
+    <% end %>
+
+    <div class="form-action buffer-both">
+      <%= f.submit 'Сохранить', class: 'button button-dark button-small' %>
+      или
+      <%= link_to "вернуться", user_path(@question.user) %>
     </div>
   <% end %>
 </div>

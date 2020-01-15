@@ -13,7 +13,7 @@
 
   <div class="question-tags">
     <% @tags.each do |tag| %>
-    <%= link_to tag.name, tag_path(tag) %>
+    <%= link_to tag.name, tag_path(tag.name) %>
     <% end %>
   </div>
 
