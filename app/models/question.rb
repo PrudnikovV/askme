@@ -24,10 +24,12 @@ class Question < ApplicationRecord
   end
 
   def save_tags
+    QuestionTag.where(question: self).destroy_all
     find_all_tags.each do |tag|
       new_tag = Tag.find_or_create_by(name: tag.downcase.delete("#"))
       QuestionTag.find_or_create_by(tag: new_tag, question: self)
     end
+    destroy_tags
   end
 
   def destroy_tags
