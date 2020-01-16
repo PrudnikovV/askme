@@ -183,7 +183,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  babosa
   bootsnap (>= 1.4.2)
   byebug
   friendly_id
