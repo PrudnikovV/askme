@@ -56,7 +56,6 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
       zeitwerk (~> 2.2)
-    babosa (1.0.3)
     bindex (0.8.1)
     bootsnap (1.4.5)
       msgpack (~> 1.0)
