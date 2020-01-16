@@ -10,5 +10,4 @@ class Tag < ApplicationRecord
   def normalize_friendly_id(text)
     text.to_s
   end
-
 end
