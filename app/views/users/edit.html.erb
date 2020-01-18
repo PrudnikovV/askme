@@ -52,7 +52,7 @@
       </div>
 
       <div class="form-action buffer-top">
-        <%= link_to 'Удалить профиль', destroy_user_path,
+        <%= link_to 'Удалить профиль', users_path, data: {method: :delete},
           class: 'button button-light button-small' %>
       </div>
     <% end %>
